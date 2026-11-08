@@ -1,0 +1,19 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Temporary and runtime files
+temp_docs/
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Cloned upstream repo
+doc2struct/
