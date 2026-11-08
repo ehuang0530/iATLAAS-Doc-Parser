@@ -125,11 +125,22 @@
         </select>
       </div>
 
-      <!-- Action: Load Sample -->
-      <button id="btn-load-sample" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-medium text-xs rounded-lg transition shadow-md shadow-emerald-900/30 flex items-center gap-1.5">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Load 10-K Sample
-      </button>
+      <!-- Action: Sample Reports Dropdown -->
+      <div class="flex items-center gap-1.5 bg-slate-900/80 px-2 py-1 rounded-lg border border-slate-700 text-xs">
+        <span class="text-emerald-400 font-semibold flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Sample:
+        </span>
+        <select id="sample-select" class="bg-slate-950 text-slate-200 outline-none cursor-pointer text-xs rounded border border-slate-700 px-1.5 py-0.5">
+          <option value="hitachi">Hitachi Human Capital Report 2025 (PDF)</option>
+          <option value="toyota">Toyota Tsusho HC Report 2025 (PDF)</option>
+          <option value="tw">Taiwan Sample ESG Report (PDF)</option>
+          <option value="fds">FactSet 10-K (SEC HTML)</option>
+        </select>
+        <button id="btn-load-sample" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-medium text-xs rounded transition shadow-sm">
+          Load
+        </button>
+      </div>
 
       <!-- Action: Upload File -->
       <label class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 active:scale-95 text-white font-medium text-xs rounded-lg transition shadow-md shadow-sky-900/30 flex items-center gap-1.5 cursor-pointer">
@@ -219,6 +230,7 @@
           </span>
           <span id="badge-total-elements" class="hidden px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-semibold border border-emerald-500/30">0 items</span>
           <span id="badge-parse-time" class="hidden px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 font-mono text-[11px]">0 ms</span>
+          <span id="badge-stitched" class="hidden px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-mono text-[11px] font-semibold border border-amber-500/30">✨ 0 Stitched</span>
         </div>
 
         <!-- View Switcher -->
@@ -255,6 +267,7 @@
         <div id="type-pills-container" class="flex items-center gap-1.5 flex-wrap">
           <button data-type="all" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-sky-600 text-white transition">All</button>
           <button data-type="table" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Tables</button>
+          <button data-type="stitched" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-amber-300 hover:bg-slate-700 transition">✨ Stitched Tables</button>
           <button data-type="title" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Titles</button>
           <button data-type="text" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Text</button>
           <button data-type="sec-items" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SEC Items</button>
@@ -518,9 +531,18 @@ async function handleFileUpload(file) {
 
 // Load sample handler
 async function loadSample() {
-  showLoading('Loading FactSet (FDS) 2026 Form 10-K sample...');
+  const sampleSelect = document.getElementById('sample-select');
+  const sampleKey = sampleSelect ? sampleSelect.value : 'hitachi';
+  const sampleLabels = {
+    fds: 'FactSet (FDS) 2026 Form 10-K',
+    hitachi: 'Hitachi Construction Machinery Human Capital Report 2025',
+    toyota: 'Toyota Tsusho Human Capital Report 2025',
+    tw: 'Taiwan Sample ESG Sustainability Report'
+  };
+  const label = sampleLabels[sampleKey] || 'Sample Document';
+  showLoading(`Loading ${label} and running table stitching...`);
   try {
-    const res = await fetch(`/api/load-sample?rules=${encodeURIComponent(rulesSelect.value)}`);
+    const res = await fetch(`/api/load-sample?sample=${encodeURIComponent(sampleKey)}&rules=${encodeURIComponent(rulesSelect.value)}`);
     const data = await res.json();
     if (data.error) throw new Error(data.error);
     renderResults(data);
@@ -586,6 +608,16 @@ function renderResults(res) {
   badgeParseTime.classList.remove('hidden');
   btnExportJson.disabled = false;
 
+  const badgeStitched = document.getElementById('badge-stitched');
+  if (badgeStitched) {
+    if (res.stitched && res.stitched_count > 0) {
+      badgeStitched.textContent = `✨ ${res.stitched_count} Stitched (${res.flagged_count} Flagged)`;
+      badgeStitched.classList.remove('hidden');
+    } else {
+      badgeStitched.classList.add('hidden');
+    }
+  }
+
   // Populate SEC Items dropdown
   if (state.secItems.length > 0) {
     secItemsWrapper.classList.remove('hidden');
@@ -601,18 +633,19 @@ function renderResults(res) {
   }
 
   // Update type pills counts
-  if (res.type_counts) {
-    document.querySelectorAll('.type-pill').forEach(pill => {
-      const type = pill.dataset.type;
-      if (type === 'all') {
-        pill.textContent = `All (${res.total_elements})`;
-      } else if (type === 'sec-items') {
-        pill.textContent = `SEC Items (${state.secItems.length})`;
-      } else if (res.type_counts[type] !== undefined) {
-        pill.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}s (${res.type_counts[type]})`;
-      }
-    });
-  }
+  const stitchedTotal = res.stitched_count || (res.data ? res.data.filter(d => d.type === 'table' && d.cleaned && d.cleaned.includes('llm_stitched_table')).length : 0);
+  document.querySelectorAll('.type-pill').forEach(pill => {
+    const type = pill.dataset.type;
+    if (type === 'all') {
+      pill.textContent = `All (${res.total_elements})`;
+    } else if (type === 'sec-items') {
+      pill.textContent = `SEC Items (${state.secItems.length})`;
+    } else if (type === 'stitched') {
+      pill.textContent = `✨ Stitched Tables (${stitchedTotal})`;
+    } else if (res.type_counts && res.type_counts[type] !== undefined) {
+      pill.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}s (${res.type_counts[type]})`;
+    }
+  });
 
   // Render Visual Cards
   applyFilter();
@@ -630,6 +663,8 @@ function applyFilter() {
     // Type filtering
     if (state.activeFilter === 'sec-items') {
       if (item.class !== 'item' && !item.standardized_title) return false;
+    } else if (state.activeFilter === 'stitched') {
+      if (item.type !== 'table' || !(item.cleaned && item.cleaned.includes('llm_stitched_table'))) return false;
     } else if (state.activeFilter !== 'all') {
       if (item.type !== state.activeFilter) return false;
     }
@@ -738,6 +773,28 @@ function renderCardsList(elements) {
 // Render Table Structure
 function renderTableElement(t) {
   let html = '';
+
+  // Stitched table indicator & Visual Check Alert
+  const isStitched = t.cleaned && t.cleaned.includes('llm_stitched_table');
+  if (isStitched) {
+    html += `<div class="mb-2 flex items-center gap-2 flex-wrap">
+      <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+        ✨ Stitched Table Matrix
+      </span>
+      ${t.needs_visual_check 
+        ? `<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold uppercase tracking-wider">⚠️ Needs Visual Check</span>`
+        : `<span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/40 text-[10px] font-semibold">✓ Verified Rectangular</span>`
+      }
+    </div>`;
+  }
+
+  if (t.needs_visual_check) {
+    html += `<div class="text-xs text-amber-300 bg-amber-950/40 border border-amber-800/60 p-2.5 rounded-lg mb-2 flex items-start gap-2">
+      <span class="text-amber-400 font-bold shrink-0">⚠️ Visual Check Required:</span>
+      <span class="text-amber-200 leading-relaxed">${escapeHtml(t.visual_check_reason || 'Reading order or row boundaries should be visually verified against original PDF.')}</span>
+    </div>`;
+  }
+
   if (t.text) {
     html += `<div class="font-bold text-sm text-emerald-300 mb-1.5 flex items-center gap-1.5">
       <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>

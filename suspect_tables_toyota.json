@@ -1,0 +1,95 @@
+[
+  {
+    "cluster_id": "cluster_966_971",
+    "preceding_title": "Corporation",
+    "block_ids": [
+      966,
+      967,
+      971
+    ],
+    "blocks": [
+      {
+        "id": 966,
+        "level": 3,
+        "type": "list",
+        "text": null,
+        "matrix": [
+          [
+            "0",
+            "* With team member"
+          ]
+        ],
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 967,
+        "level": 3,
+        "type": "text",
+        "text": "short mental break. Ms. Iwata",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 971,
+        "level": 3,
+        "type": "text",
+        "text": "— Aspire (WILL)",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_1589_1593",
+    "preceding_title": "Average Duration of Leave Taken",
+    "block_ids": [
+      1589,
+      1592,
+      1593
+    ],
+    "blocks": [
+      {
+        "id": 1589,
+        "level": 3,
+        "type": "text",
+        "text": "Take-up Rate",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 1592,
+        "level": 3,
+        "type": "title",
+        "text": "DE&I",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 1593,
+        "level": 4,
+        "type": "text",
+        "text": "— Fostering a corporate culture that embraces diversity and drives mindset transformation.",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  }
+]

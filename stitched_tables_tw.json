@@ -1,0 +1,68 @@
+[
+  {
+    "cluster_id": "cluster_tw_p43_headcount",
+    "preceding_title": "依職級與性別之員工人數統計",
+    "table_title": "依職級與性別之員工人數統計 (Employee Statistics by Job Grade and Gender)",
+    "block_ids": [
+      1398, 1400, 1401, 1402, 1403, 1406, 1407, 1408, 1410, 1411, 1412
+    ],
+    "matrix": [
+      ["Year", "Job Grade", "Female (Headcount)", "Female (%)", "Male (Headcount)", "Male (%)", "Total (Headcount)", "Total (%)"],
+      ["2024", "主管 (Managers)", "58", "29%", "142", "71%", "200", "6.7%"],
+      ["2024", "非主管 (Non-managers)", "1,033", "38%", "1,716", "62%", "2,749", "93.3%"],
+      ["2023", "主管 (Managers)", "30", "15%", "170", "85%", "200", "7.3%"],
+      ["2023", "非主管 (Non-managers)", "874", "34%", "1,665", "66%", "2,539", "92.7%"],
+      ["2022", "主管 (Managers)", "39", "13%", "174", "87%", "213", "9.4%"],
+      ["2022", "非主管 (Non-managers)", "612", "21.10%", "1,421", "71.31%", "2,033", "90.6%"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_tw_p43_minsalary",
+    "preceding_title": "2024年基層人員標準薪資與當地最低薪資比率",
+    "table_title": "2024年基層人員標準薪資與當地最低薪資比率 (Entry Salary vs Minimum Wage Ratio)",
+    "block_ids": [
+      1415, 1416, 1418, 1421, 1425
+    ],
+    "matrix": [
+      ["性別 (Gender)", "泰國 (Thailand)", "新加坡 (Singapore)", "日本 (Japan)"],
+      ["男", "1.15", "1.16", "1.15"],
+      ["女", "1.15", "1.16", "1.15"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_tw_p43_turnover_count",
+    "preceding_title": "台灣地區正職人員離職人數",
+    "table_title": "台灣地區正職人員離職人數 (Turnover Headcount in Taiwan by Gender and Age)",
+    "block_ids": [
+      1419, 1428
+    ],
+    "matrix": [
+      ["Year", "性別: 女", "性別: 男", "性別總計", "年齡: 30歲以下", "年齡: 31-50歲", "年齡: 51歲以上", "年齡總計"],
+      ["2024年", "17", "38", "55", "26", "26", "3", "55"],
+      ["2023年", "11", "39", "50", "19", "29", "2", "50"],
+      ["2022年", "9", "41", "50", "19", "27", "4", "50"]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Interleaved column coordinates with minimum salary table on Page 43."
+  },
+  {
+    "cluster_id": "cluster_tw_p43_turnover_rate",
+    "preceding_title": "離職率",
+    "table_title": "台灣地區正職人員離職率 (Turnover Rate in Taiwan by Gender and Age)",
+    "block_ids": [
+      1431, 1434, 1437
+    ],
+    "matrix": [
+      ["Year", "性別: 女", "性別: 男", "性別總計", "年齡: 30歲以下", "年齡: 31-50歲", "年齡: 51歲以上", "年齡總計"],
+      ["2024年", "6%", "13%", "19%", "9%", "9%", "1%", "19%"],
+      ["2023年", "4%", "14%", "18%", "6%", "10%", "1%", "17%"],
+      ["2022年", "3%", "15%", "18%", "7%", "10%", "1%", "18%"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  }
+]

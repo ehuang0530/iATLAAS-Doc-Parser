@@ -1,0 +1,122 @@
+[
+  {
+    "cluster_id": "cluster_toyota_p38",
+    "preceding_title": "Human Capital Metrics",
+    "table_title": "Human Capital Metrics - Basic Information & Diversity",
+    "block_ids": [
+      1864, 1865, 1868, 1869, 1871, 1872, 1875, 1876, 1880, 1881, 1882, 1883, 1886, 1887, 1888, 1889,
+      1890, 1891, 1892, 1893, 1894, 1895, 1896, 1897, 1898, 1899, 1900, 1901, 1902, 1903, 1904, 1905,
+      1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 1918, 1919, 1920, 1921,
+      1922, 1923, 1924, 1925, 1926, 1927, 1928, 1929, 1930, 1931
+    ],
+    "matrix": [
+      ["Item", "Indicator", "FY2022", "FY2023", "FY2024", "Target", "Our Definition"],
+      ["Executive Members", "Number of Executives", "57", "57", "55", "-", "Board Members + Senior Executive Officers + Executive Officers"],
+      ["Basic Information", "Number of Employees (Total)", "3,630", "3,629", "3,602", "-", "Includes employees seconded out; excludes employees seconded in from other companies"],
+      ["Basic Information", "Number of Employees (Permanent)", "3,297", "3,292", "3,251", "-", "Includes employees seconded out; excludes employees seconded in from other companies"],
+      ["Basic Information", "Number of Employees (Fixed-term)", "333", "337", "351", "-", "Includes employees seconded out; excludes employees seconded in from other companies"],
+      ["Basic Information", "Average Age (Overall)", "43.1 years", "43.2 years", "43.1 years", "-", "Average age of directly employed permanent employees"],
+      ["Basic Information", "Average Age (Male)", "43.6 years", "43.5 years", "43.3 years", "-", "Average age of directly employed permanent employees"],
+      ["Basic Information", "Age distribution by age group (20s)", "10.6%", "10.2%", "10.2%", "-", "Age distribution of directly employed permanent employees"],
+      ["Basic Information", "Age distribution by age group (30s)", "26.7%", "26.6%", "26.4%", "-", "Age distribution of directly employed permanent employees"],
+      ["Basic Information", "Age distribution by age group (40s)", "23.3%", "23.8%", "23.9%", "-", "Age distribution of directly employed permanent employees"],
+      ["Employee Diversity", "Gender (Male)", "70.5%", "70.6%", "70.7%", "-", "Gender ratio of directly employed employees"],
+      ["Employee Diversity", "Gender (Female)", "29.5%", "29.4%", "29.3%", "-", "Gender ratio of directly employed employees"],
+      ["Employee Diversity", "Gender Ratio of Managers (Male)", "93.5%", "92.6%", "91.6%", "-", "As of April each fiscal year"],
+      ["Employee Diversity", "Gender Ratio of Managers (Female)", "6.5%", "7.4%", "8.4%", "FY2025 Female: 10% (As of April 2025: 9.5%)", "As of April each fiscal year"],
+      ["Employee Diversity", "Employment Rate of Persons with Disabilities", "2.62%", "2.79%", "2.79%", "Compliance with statutory rate", "Compliance with the statutory employment rate, considering its gradual increase"],
+      ["Diversity of Executives", "Internal Directors", "50.0%", "50.0%", "55.6%", "-", "-"],
+      ["Diversity of Executives", "Independent Outside Directors", "37.5%", "37.5%", "33.3%", "At least one-third of directors are independent", "-"],
+      ["Diversity of Executives", "Non-Independent Outside Directors", "12.5%", "12.5%", "11.1%", "-", "-"],
+      ["Diversity of Executives", "Outside Female Directors", "2 female", "2 female", "2 female", "At least one director is female", "Among the four outside directors, one is a foreign national and two are female"]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Dense multi-column layout on Page 38 with interleaved executive and employee age/gender blocks. Outside directors metrics summarized from narrative footnote."
+  },
+  {
+    "cluster_id": "cluster_toyota_p39",
+    "preceding_title": "Human Capital Metrics",
+    "table_title": "Human Capital Metrics - Skills, Leadership Development & Productivity",
+    "block_ids": [
+      1936, 1937, 1940, 1941, 1942, 1943, 1947, 1948, 1949, 1950, 1951, 1955, 1957, 1958, 1959, 1961,
+      1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1974, 1975, 1976, 1977, 1978,
+      1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995,
+      1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007
+    ],
+    "matrix": [
+      ["Item", "Indicator", "FY2022", "FY2023", "FY2024", "Target", "Our Definition"],
+      ["Skills and Capabilities", "Total Cost of Talent Development and Training Programs", "Approximately 580 million yen", "Approximately 590 million yen", "Approximately 650 million yen", "-", "-"],
+      ["Skills and Capabilities", "Training Cost per Employee", "Approximately 170,000 yen", "Approximately 180,000 yen", "Approximately 200,000 yen", "-", "-"],
+      ["Skills and Capabilities", "Average training hours per employee", "27.7 hours/year", "34.2 hours/year", "35.8 hours/year", "-", "-"],
+      ["Leadership Development & Executive Candidate Leadership Training", "Next-Generation Leadership Training Participants (GALP* - TTC)", "9", "8", "10", "TTC: 10 per year", "Global Advanced Leadership Program hosted by TTC"],
+      ["Leadership Development & Executive Candidate Leadership Training", "Next-Generation Leadership Training Participants (GALP* - Overseas Region)", "11", "12", "11", "Overseas Regions: 20 per year", "Global Advanced Leadership Program hosted by TTC"],
+      ["Leadership Development & Executive Candidate Leadership Training", "Next-Generation Leadership Training Participants (LDP* - TTC)", "8", "8", "9", "TTC: 10 per year", "Leadership Development Program hosted by TTC"],
+      ["Leadership Development & Executive Candidate Leadership Training", "Next-Generation Leadership Training Participants (LDP* - Overseas Region)", "19", "20", "20", "Overseas Regions: 20 per year", "Leadership Development Program hosted by TTC"],
+      ["Leadership Development & Executive Candidate Leadership Training", "Next-Generation Leadership Training Participants (CEP*)", "21", "20", "21", "20 per year", "CEO Essentials Program"],
+      ["Cost", "Total Labor Cost (including employee welfare costs)", "41,042 million yen", "43,115 million yen", "41,353 million yen", "-", "Personnel expenses"],
+      ["Productivity", "EBIT per Employee", "53 million yen", "84 million yen", "103 million yen", "-", "-"],
+      ["Productivity", "Sales per Employee", "688 million yen", "764 million yen", "732 million yen", "-", "-"],
+      ["Productivity", "Profit per Employee", "44 million yen", "92 million yen", "108 million yen", "-", "-"],
+      ["Productivity", "Human Capital ROI", "3.44", "5.26", "6.93", "-", "Operating Profit ÷ Personnel Expenses (including employee welfare costs)"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_toyota_p40",
+    "preceding_title": "Human Capital Metrics",
+    "table_title": "Human Capital Metrics - Recruitment, Mobility, Turnover & Workforce Availability",
+    "block_ids": [
+      2012, 2013, 2016, 2017, 2018, 2020, 2021, 2024, 2025, 2026, 2030, 2031, 2032, 2033, 2035, 2036,
+      2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052,
+      2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063, 2064, 2065, 2066, 2067, 2068,
+      2069, 2070, 2071, 2072, 2073
+    ],
+    "matrix": [
+      ["Item", "Indicator", "FY2022", "FY2023", "FY2024", "Target", "Our Definition"],
+      ["Recruitment, Mobility and Turnover", "Average Number of Days for Recruitment (New Graduate)", "71.2 days", "73.4 days", "60.0 days", "-", "Average from application to final interview date"],
+      ["Recruitment, Mobility and Turnover", "Average Number of Days for Recruitment (Mid-Career)", "51.0 days", "45.7 days", "51.0 days", "-", "Average from application to final interview date"],
+      ["Recruitment, Mobility and Turnover", "Average Number of Days to Fill Key Positions", "0 days", "0 days", "0 days", "No vacancy period", "-"],
+      ["Recruitment, Mobility and Turnover", "Internal Promotion Rate", "92%", "92%", "93%", "-", "The proportion of internal promotions among personnel placements through transfers or new hires*"],
+      ["Recruitment, Mobility and Turnover", "Internal Promotion Rate for Key Positions", "100%", "100%", "100%", "-", "-"],
+      ["Recruitment, Mobility and Turnover", "Internal Mobility Rate", "28.9%", "30.7%", "33.1%", "-", "Transfers across regions/functions and promotions"],
+      ["Recruitment, Mobility and Turnover", "Turnover Rate", "5.2%", "4.1%", "5.2%", "-", "Applicable to directly employed permanent employees"],
+      ["Recruitment, Mobility and Turnover", "Voluntary Turnover Rate", "2.9%", "1.8%", "2.1%", "-", "Applicable to directly employed permanent employees"],
+      ["Workforce Availability", "Total Number of Employees (Full-time)", "3,630", "3,629", "3,602", "-", "-"],
+      ["Workforce Availability", "Total Number of Employees (Part-time)", "0", "0", "0", "-", "-"],
+      ["Workforce Availability", "Temporary Workforce (Dispatched Workers)", "220", "233", "197", "-", "Temporary Staff"],
+      ["Absenteeism", "Absenteeism (Physical)", "0.25%", "0.38%", "0.23%", "0.15%", "Loss ratio of employees who took 7 or more consecutive days off due to non-work-related illness or injury"],
+      ["Absenteeism", "Absenteeism (Mental)", "0.52%", "0.61%", "0.41%", "0.25%", "Loss ratio of employees who took 7 or more consecutive days off due to non-work-related illness or injury"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_toyota_p41",
+    "preceding_title": "Human Capital Metrics",
+    "table_title": "Human Capital Metrics - Health, Safety, Well-being & Compliance",
+    "block_ids": [
+      2078, 2079, 2082, 2083, 2084, 2089, 2093, 2094, 2095, 2098, 2099, 2100, 2101, 2102, 2103, 2104,
+      2105, 2106, 2107, 2108, 2109, 2110, 2111, 2112, 2113, 2114, 2115, 2116, 2117, 2118, 2119, 2120,
+      2121, 2122, 2123, 2124, 2125, 2126, 2127, 2128, 2129, 2130, 2131, 2132, 2133, 2134, 2135, 2136,
+      2137, 2138, 2139, 2141, 2142, 2143, 2144
+    ],
+    "matrix": [
+      ["Item", "Indicator", "FY2022", "FY2023", "FY2024", "Target", "Our Definition"],
+      ["Health, Safety and Well-being", "Lost Time Due to Occupational Accidents (Severity Rate)", "0 hours", "0 hours", "0 hours", "0 hours", "-"],
+      ["Health, Safety and Well-being", "Occupational Accident Frequency Rate*", "0%", "0%", "0%", "0%", "Occupational accidents within group reported per standards"],
+      ["Health, Safety and Well-being", "Occupational Accident Fatality Rate", "0%", "0%", "0%", "0%", "-"],
+      ["Health, Safety and Well-being", "Safety Training for Overseas Assignees Participation Rate", "92.5%", "94.0%", "91.1%", "100%", "Pre-assignment training conducted by HR Dept for overseas postings"],
+      ["Health, Safety and Well-being", "Health and Safety Training Number of Participants", "3,166 participants", "Total: 3,424 participants", "Total: 3,429 participants", "-", "-"],
+      ["Health, Safety and Well-being", "Infectious Disease Seminar Participation Rate", "—", "—", "81.7%", "-", "Significantly revised and rolled out in FY2024"],
+      ["Compliance and Ethics", "Number and type of grievance filed (Harassment)", "7", "11", "13", "Complaints are suppressed", "Personnel-related cases reported through internal whistleblowing"],
+      ["Compliance and Ethics", "Number and type of grievance filed (Workplace Environment)", "0", "1", "0", "Complaints are suppressed", "Personnel-related cases reported through internal whistleblowing"],
+      ["Compliance and Ethics", "Number and type of grievance filed (Others)", "0", "3", "1", "Complaints are suppressed", "Personnel-related cases reported through internal whistleblowing"],
+      ["Compliance and Ethics", "Concluded disciplinary action (Dismissal)", "0", "0", "1", "-", "-"],
+      ["Compliance and Ethics", "Concluded disciplinary action (Other than Dismissal)", "1", "5", "4", "-", "-"],
+      ["Compliance and Ethics", "Percentage of employees who completed compliance & ethics training", "100%", "100%", "100%", "100%*", "Targeting new employees, second-year employees, and mid-career hires"]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  }
+]

@@ -1,0 +1,260 @@
+[
+  {
+    "cluster_id": "cluster_410_414",
+    "preceding_title": "Total number of employees （Full-time and Part-time）",
+    "table_title": "Age Distribution (Fragment)",
+    "block_ids": [
+      410,
+      412,
+      414
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Category",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Global consolidated",
+        "60 years old and above",
+        "People",
+        "1,228",
+        "1,313",
+        "1,247",
+        "-"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Under 30 years old",
+        "People",
+        "1,154",
+        "1,300",
+        "1,223",
+        "-"
+      ]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Reading order is scrambled across multi-column layout on Page 22. Cluster only captures fragments of the 'Age' table interleaved with header fragments."
+  },
+  {
+    "cluster_id": "cluster_466_473",
+    "preceding_title": "Operating profit per FTE",
+    "table_title": "Employment of Persons with Disabilities & Operating Profit per FTE",
+    "block_ids": [
+      466,
+      468,
+      470,
+      472,
+      473
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Indicator",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Global consolidated",
+        "Statutory employment rate*2",
+        "%",
+        "2.51",
+        "2.50",
+        "2.47",
+        "Statutory or over"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Statutory employment rate",
+        "%",
+        "2.40",
+        "2.45",
+        "2.45",
+        "Statutory or over"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Operating profit per FTE",
+        "Million Yen",
+        "4.4",
+        "2.3",
+        "0.3",
+        "Above previous year's figures"
+      ]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Cross-column interleaving on Page 23 between 'Employment of Persons with Disabilities' (left) and 'Operating profit per FTE' (right)."
+  },
+  {
+    "cluster_id": "cluster_478_482",
+    "preceding_title": "Revenue per employee",
+    "table_title": "Revenue per employee",
+    "block_ids": [
+      478,
+      481,
+      482
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Indicator",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "-",
+        "Million Yen",
+        "106.7",
+        "116.6",
+        "104.1",
+        "Above previous year's figures"
+      ]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_487_491",
+    "preceding_title": "Human Capital ROI",
+    "table_title": "Human Capital ROI",
+    "block_ids": [
+      487,
+      490,
+      491
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Indicator",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "-",
+        "%",
+        "52.0",
+        "27.0",
+        "-0.5",
+        "Above previous year's figures"
+      ]
+    ],
+    "needs_visual_check": false,
+    "visual_check_reason": null
+  },
+  {
+    "cluster_id": "cluster_550_555",
+    "preceding_title": "Turnover rate",
+    "table_title": "Turnover Rate & Training Hours per Participant",
+    "block_ids": [
+      550,
+      552,
+      555
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Category",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Average training hours per participant",
+        "Hours",
+        "68.51",
+        "71.81",
+        "57.77",
+        "-"
+      ],
+      [
+        "Global consolidated",
+        "Turnover rate*2",
+        "%",
+        "10.52",
+        "9.44",
+        "10.41",
+        "-"
+      ]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Cross-column interleaving on Page 25 between 'Training hours per employee' and 'Turnover rate' tables."
+  },
+  {
+    "cluster_id": "cluster_581_585",
+    "preceding_title": "Number and type of grievance filed Disputes referred to external parties",
+    "table_title": "Grievances Filed & Disputes Referred to External Parties",
+    "block_ids": [
+      581,
+      582,
+      583,
+      585
+    ],
+    "matrix": [
+      [
+        "Entity Scope",
+        "Category / Indicator",
+        "Unit",
+        "2022FY",
+        "2023FY",
+        "2024FY",
+        "Target (2025FY)"
+      ],
+      [
+        "Global consolidated",
+        "Compliance reports",
+        "Cases",
+        "54",
+        "95",
+        "81",
+        "-"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Harassment-related issues",
+        "Cases",
+        "5",
+        "27",
+        "23",
+        "-"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Other labor-related matters",
+        "Cases",
+        "1",
+        "3",
+        "7",
+        "-"
+      ],
+      [
+        "Hitachi Construction Machinery (standalone)",
+        "Disputes referred to external parties",
+        "Cases",
+        "0",
+        "1",
+        "1",
+        "-"
+      ]
+    ],
+    "needs_visual_check": true,
+    "visual_check_reason": "Interleaved rows from two side-by-side tables on Page 26 ('Number and type of grievance filed' and 'Disputes referred to external parties')."
+  }
+]

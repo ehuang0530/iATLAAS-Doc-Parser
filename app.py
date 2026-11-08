@@ -2,7 +2,8 @@
 """
 doc2struct Web UI Backend
 Provides an interactive split-view interface to upload/view original documents (PDF/HTML)
-and inspect doc2struct structured JSON output with readability controls.
+and inspect doc2struct structured JSON output with readability controls and
+table stitching recovery.
 """
 
 import gzip
@@ -22,9 +23,13 @@ except ImportError:
     print("Error: doc2struct not found. Make sure you activate your venv or install doc2struct.")
     raise
 
+from stitch_tables import auto_stitch_document
+
 BASE_DIR = Path(__file__).resolve().parent
 TEMP_DOCS_DIR = BASE_DIR / "temp_docs"
+SAMPLES_DIR = BASE_DIR / "samples"
 TEMP_DOCS_DIR.mkdir(exist_ok=True)
+SAMPLES_DIR.mkdir(exist_ok=True)
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024  # 100 MB max upload
@@ -66,7 +71,6 @@ def get_presets():
     try:
         namespaces = doc2struct.list_namespaces()
         sec_types = doc2struct.list_document_types("SEC")
-        # Format as list of choices
         presets = ["None (Default)", "SEC:10-K", "SEC:10-Q", "SEC:8-K"]
         for dt in sec_types:
             preset_name = f"SEC:{dt}"
@@ -77,6 +81,7 @@ def get_presets():
         return jsonify({"namespaces": ["SEC"], "presets": ["None (Default)", "SEC:10-K", "SEC:10-Q", "SEC:8-K"]})
 
 
+@app.route("/api/visualizer/<doc_id>", methods=["GET"])
 @app.route("/api/visualize/<doc_id>", methods=["GET"])
 def get_visualizer(doc_id):
     """Generate and serve doc2struct HTML visualizer."""
@@ -96,7 +101,6 @@ def get_document(doc_id):
     """Serve the original document for iframe embedding."""
     doc_info = DOC_STORE.get(doc_id)
     if not doc_info:
-        # Check on disk
         for p in TEMP_DOCS_DIR.glob(f"{doc_id}.*"):
             ext = p.suffix.lower()
             mimetype = "application/pdf" if ext == ".pdf" else "text/html; charset=utf-8" if ext in (".htm", ".html") else "text/plain"
@@ -105,25 +109,21 @@ def get_document(doc_id):
 
     file_path = doc_info["path"]
     mimetype = "application/pdf" if doc_info["file_type"] == "pdf" else "text/html; charset=utf-8" if doc_info["file_type"] == "html" else "text/plain"
-    
-    # Send with inline disposition so browser renders it in iframe
     return send_file(file_path, mimetype=mimetype, as_attachment=False)
 
 
 @app.route("/api/parse", methods=["POST"])
 def parse_document():
-    """Upload and process a document."""
+    """Upload and process a document with automatic table stitching."""
     rules = request.form.get("rules", "SEC:10-K")
     doc_bytes = None
     filename = "document"
 
-    # Option A: Uploaded file
     if "file" in request.files and request.files["file"].filename != "":
         uploaded = request.files["file"]
         filename = uploaded.filename
         doc_bytes = uploaded.read()
 
-    # Option B: URL provided
     elif request.form.get("url"):
         url = request.form.get("url").strip()
         filename = url.split("/")[-1] or "document.htm"
@@ -148,12 +148,10 @@ def parse_document():
     file_type = detect_file_type(doc_bytes, filename)
     doc_id = str(uuid.uuid4())[:8]
 
-    # Save to temp_docs
     ext = ".pdf" if file_type == "pdf" else ".html" if file_type == "html" else ".txt"
     file_path = TEMP_DOCS_DIR / f"{doc_id}{ext}"
     file_path.write_bytes(doc_bytes)
 
-    # Record in store
     DOC_STORE[doc_id] = {
         "doc_id": doc_id,
         "filename": filename,
@@ -162,17 +160,18 @@ def parse_document():
         "size": len(doc_bytes)
     }
 
-    # Execute parsing
     start_time = time.perf_counter()
     try:
-        elements = process_with_doc2struct(doc_bytes, file_type, rules)
-        elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
+        raw_elements = process_with_doc2struct(doc_bytes, file_type, rules)
     except Exception as e:
         return jsonify({"error": f"doc2struct parsing failed: {str(e)}"}), 500
 
+    # Apply Table Stitching pipeline to every document loaded
+    elements, stitch_meta = auto_stitch_document(raw_elements, filename)
+    elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
+
     DOC_STORE[doc_id]["elements"] = elements
 
-    # Calculate summaries
     counts = dict(Counter(e.get("type", "unknown") for e in elements))
     sec_items = [
         {
@@ -196,38 +195,68 @@ def parse_document():
         "total_elements": len(elements),
         "type_counts": counts,
         "sec_items": sec_items,
+        "stitched": stitch_meta.get("stitched", False),
+        "stitched_count": stitch_meta.get("count", 0),
+        "flagged_count": stitch_meta.get("flagged", 0),
+        "stitched_tables": stitch_meta.get("stitched_tables", []),
         "data": elements
     })
 
 
 @app.route("/api/load-sample", methods=["GET", "POST"])
 def load_sample():
-    """Load the bundled FactSet 10-K filing sample."""
-    sample_path = BASE_DIR / "fds-20260831.htm"
+    """Load sample documents with table stitching."""
+    sample_key = request.args.get("sample", "fds").lower()
+
+    if sample_key == "hitachi":
+        sample_path = SAMPLES_DIR / "Hitachi Construction Machinery Group_human-capital-report2025-EN.pdf"
+        file_type = "pdf"
+        filename = "Hitachi_Construction_Machinery_Group_human-capital-report2025-EN.pdf"
+        doc_id = "sample_hitachi"
+        rules = "None"
+    elif sample_key == "toyota":
+        sample_path = SAMPLES_DIR / "Toyota_Tsusho_human_capital_report_en_2025.pdf"
+        file_type = "pdf"
+        filename = "Toyota_Tsusho_human_capital_report_en_2025.pdf"
+        doc_id = "sample_toyota"
+        rules = "None"
+    elif sample_key in ("tw", "taiwan"):
+        sample_path = SAMPLES_DIR / "TWSampleESGReport.pdf"
+        file_type = "pdf"
+        filename = "TWSampleESGReport.pdf"
+        doc_id = "sample_tw"
+        rules = "None"
+    else:  # fds
+        sample_path = BASE_DIR / "fds-20260831.htm"
+        file_type = "html"
+        filename = "fds-20260831.htm (FactSet 10-K)"
+        doc_id = "sample_fds_10k"
+        rules = "SEC:10-K"
+
     if not sample_path.exists():
-        # Fallback to fetching it
-        url = "https://www.sec.gov/Archives/edgar/data/1013237/000162828026066391/fds-20260831.htm"
-        headers = {"User-Agent": "ResearchAssistant/1.0 (sec-research@example.com)"}
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            sample_path.write_bytes(resp.read())
+        return jsonify({"error": f"Sample file not found: {sample_path.name}"}), 404
 
     doc_bytes = sample_path.read_bytes()
-    doc_id = "sample_fds_10k"
-    dest_path = TEMP_DOCS_DIR / f"{doc_id}.html"
+    ext = ".pdf" if file_type == "pdf" else ".html"
+    dest_path = TEMP_DOCS_DIR / f"{doc_id}{ext}"
     dest_path.write_bytes(doc_bytes)
 
     DOC_STORE[doc_id] = {
         "doc_id": doc_id,
-        "filename": "fds-20260831.htm (FactSet 10-K)",
-        "file_type": "html",
+        "filename": filename,
+        "file_type": file_type,
         "path": dest_path,
         "size": len(doc_bytes)
     }
 
-    rules = request.args.get("rules", "SEC:10-K")
     start_time = time.perf_counter()
-    elements = doc2struct.parse_html(doc_bytes, rules=rules)
+    if file_type == "pdf":
+        raw_elements = doc2struct.parse_pdf(doc_bytes)
+    else:
+        raw_elements = doc2struct.parse_html(doc_bytes, rules=rules)
+
+    # Perform table stitching
+    elements, stitch_meta = auto_stitch_document(raw_elements, filename)
     elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
     DOC_STORE[doc_id]["elements"] = elements
 
@@ -245,8 +274,8 @@ def load_sample():
     return jsonify({
         "status": "success",
         "doc_id": doc_id,
-        "filename": "fds-20260831.htm (FactSet 10-K)",
-        "file_type": "html",
+        "filename": filename,
+        "file_type": file_type,
         "file_size": len(doc_bytes),
         "rules": rules,
         "view_url": f"/api/document/{doc_id}",
@@ -254,6 +283,10 @@ def load_sample():
         "total_elements": len(elements),
         "type_counts": counts,
         "sec_items": sec_items,
+        "stitched": stitch_meta.get("stitched", False),
+        "stitched_count": stitch_meta.get("count", 0),
+        "flagged_count": stitch_meta.get("flagged", 0),
+        "stitched_tables": stitch_meta.get("stitched_tables", []),
         "data": elements
     })
 
@@ -262,4 +295,3 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
     print(f"Starting doc2struct Web UI on http://localhost:{port}")
     app.run(host="0.0.0.0", port=port, debug=False)
-

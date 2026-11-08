@@ -1,0 +1,1434 @@
+[
+  {
+    "cluster_id": "cluster_10_13",
+    "preceding_title": "Human Capital for a Prosperous Future",
+    "block_ids": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "blocks": [
+      {
+        "id": 10,
+        "level": 1,
+        "type": "title",
+        "text": "Chapter 2",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 11,
+        "level": 1,
+        "type": "title",
+        "text": " Message",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 12,
+        "level": 2,
+        "type": "text",
+        "text": "Message from the President and Executive Officer, COO Message from the CHRO",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 13,
+        "level": 1,
+        "type": "title",
+        "text": "Chapter 3",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_17_20",
+    "preceding_title": "Major Initiatives",
+    "block_ids": [
+      17,
+      18,
+      19,
+      20
+    ],
+    "blocks": [
+      {
+        "id": 17,
+        "level": 1,
+        "type": "title",
+        "text": "Chapter 4",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 18,
+        "level": 1,
+        "type": "title",
+        "text": " Appendix",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 19,
+        "level": 0,
+        "type": "title",
+        "text": "Data Collection",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 20,
+        "level": 1,
+        "type": "text",
+        "text": "Hitachi Construction Machinery Group Human Capital Report 2025 01",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_26_28",
+    "preceding_title": "Human Capital for a Prosperous Future",
+    "block_ids": [
+      26,
+      27,
+      28
+    ],
+    "blocks": [
+      {
+        "id": 26,
+        "level": 1,
+        "type": "title",
+        "text": "Chapter 1",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 27,
+        "level": 2,
+        "type": "text",
+        "text": "Hitachi Construction Machinery Group Human Capital Report 2025 02",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 28,
+        "level": 1,
+        "type": "title",
+        "text": "Chapter 1",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_85_88",
+    "preceding_title": "Enhancing Management Skills and Leadership",
+    "block_ids": [
+      85,
+      86,
+      87,
+      88
+    ],
+    "blocks": [
+      {
+        "id": 85,
+        "level": 1,
+        "type": "title",
+        "text": "To-Be (2030)",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 86,
+        "level": 0,
+        "type": "title",
+        "text": "Enhancing Development of Global Talent",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 87,
+        "level": 1,
+        "type": "title",
+        "text": "Where every Kenkijin can be",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 88,
+        "level": 2,
+        "type": "text",
+        "text": "Supporting Self-Directed Career Development",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_146_152",
+    "preceding_title": "Deployment to Promote Understanding of the Medium-Term Management Plan",
+    "block_ids": [
+      146,
+      149,
+      152
+    ],
+    "blocks": [
+      {
+        "id": 146,
+        "level": 1,
+        "type": "title",
+        "text": "80.0",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 149,
+        "level": 2,
+        "type": "text",
+        "text": "75.1 75.9",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 152,
+        "level": 2,
+        "type": "text",
+        "text": "(%) 2022 2023 2024",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_214_219",
+    "preceding_title": "Group Companies",
+    "block_ids": [
+      214,
+      216,
+      217,
+      218,
+      219
+    ],
+    "blocks": [
+      {
+        "id": 214,
+        "level": 3,
+        "type": "text",
+        "text": "74 14",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 216,
+        "level": 3,
+        "type": "title",
+        "text": "KPI",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 217,
+        "level": 4,
+        "type": "text",
+        "text": "71 11 .2 72 12 10.8 10.8",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 218,
+        "level": 0,
+        "type": "title",
+        "text": "Items",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 219,
+        "level": 1,
+        "type": "text",
+        "text": "Scope Unit 2022FY 2023FY 2024",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_222_226",
+    "preceding_title": "Items",
+    "block_ids": [
+      222,
+      223,
+      224,
+      225,
+      226
+    ],
+    "blocks": [
+      {
+        "id": 222,
+        "level": 0,
+        "type": "title",
+        "text": "Male",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 223,
+        "level": 1,
+        "type": "text",
+        "text": "Female",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 224,
+        "level": 1,
+        "type": "title",
+        "text": "Related Data",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 225,
+        "level": 0,
+        "type": "title",
+        "text": "Items",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 226,
+        "level": 1,
+        "type": "text",
+        "text": "Scope Unit 2022FY 2023FY 2024",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_271_273",
+    "preceding_title": "",
+    "block_ids": [
+      271,
+      272,
+      273
+    ],
+    "blocks": [
+      {
+        "id": 271,
+        "level": 1,
+        "type": "title",
+        "text": "Supporting Self-Directed Career Development",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 272,
+        "level": 2,
+        "type": "title",
+        "text": "KPI",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 273,
+        "level": 1,
+        "type": "title",
+        "text": " Training Hours per Employee",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_409_414",
+    "preceding_title": "",
+    "block_ids": [
+      409,
+      410,
+      412,
+      414
+    ],
+    "blocks": [
+      {
+        "id": 409,
+        "level": 1,
+        "type": "title",
+        "text": "Total number of employees （Full-time and Part-time）",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 410,
+        "level": 2,
+        "type": "text",
+        "text": "60 years old and above People 1,228 1,313 1,247 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 412,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 414,
+        "level": 2,
+        "type": "text",
+        "text": "Under 30 years old People 1,154 1,300 1,223 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_418_434",
+    "preceding_title": "Executives",
+    "block_ids": [
+      418,
+      419,
+      421,
+      423,
+      424,
+      425,
+      427,
+      429,
+      430,
+      431,
+      433,
+      434
+    ],
+    "blocks": [
+      {
+        "id": 418,
+        "level": 1,
+        "type": "text",
+        "text": "Machinery (standalone) Part-time People 54 48 46 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 419,
+        "level": 1,
+        "type": "title",
+        "text": "Gender",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 421,
+        "level": 2,
+        "type": "text",
+        "text": "Scope Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 423,
+        "level": 1,
+        "type": "title",
+        "text": "Full-Time Equivalent （FTE）*",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 424,
+        "level": 0,
+        "type": "title",
+        "text": "Male",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 425,
+        "level": 1,
+        "type": "text",
+        "text": "People 23,741 24,836 24,467 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 427,
+        "level": 1,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 429,
+        "level": 1,
+        "type": "text",
+        "text": ") Global consolidated",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 430,
+        "level": 0,
+        "type": "title",
+        "text": "Female",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 431,
+        "level": 1,
+        "type": "text",
+        "text": "People 3,048 3,305 3,369 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 433,
+        "level": 1,
+        "type": "text",
+        "text": "Machinery (standalone) - People 6,815 6,951 7,012 - Total employees People 5,640 5,864 5,902 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 434,
+        "level": 0,
+        "type": "title",
+        "text": "Male",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_444_448",
+    "preceding_title": "Diversity among the Top Management* Engagement",
+    "block_ids": [
+      444,
+      446,
+      447,
+      448
+    ],
+    "blocks": [
+      {
+        "id": 444,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025FY) Scope Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 446,
+        "level": 0,
+        "type": "title",
+        "text": "Indirect",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 447,
+        "level": 1,
+        "type": "text",
+        "text": "+1.0% compared",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 448,
+        "level": 0,
+        "type": "title",
+        "text": "Male",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_450_473",
+    "preceding_title": "Male",
+    "block_ids": [
+      450,
+      451,
+      453,
+      454,
+      455,
+      457,
+      458,
+      459,
+      460,
+      461,
+      463,
+      465,
+      466,
+      468,
+      470,
+      472,
+      473
+    ],
+    "blocks": [
+      {
+        "id": 450,
+        "level": 0,
+        "type": "title",
+        "text": "Female",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 451,
+        "level": 1,
+        "type": "text",
+        "text": "% 1.6 2.2 2.1 - employees % 55.9 57.9 60.2 to the previous year",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 453,
+        "level": 1,
+        "type": "text",
+        "text": "employee surveys Machinery (standalone) Direct +1.0% compared",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 454,
+        "level": 0,
+        "type": "title",
+        "text": "Male",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 455,
+        "level": 1,
+        "type": "text",
+        "text": "% 92.3 92.0 92.9 - employees % 56.5 61.5 59.8 to the previous year",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 457,
+        "level": 1,
+        "type": "text",
+        "text": "Machinery (standalone) Above previous",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 458,
+        "level": 0,
+        "type": "title",
+        "text": "Female",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 459,
+        "level": 1,
+        "type": "text",
+        "text": "% 7.7 8.0 7.1 year's figures *1 Management: Board members and executive officers",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 460,
+        "level": 1,
+        "type": "title",
+        "text": "Productivity",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 461,
+        "level": 1,
+        "type": "title",
+        "text": "Employment of Persons with Disabilities",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 463,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 465,
+        "level": 1,
+        "type": "title",
+        "text": " Operating profit per FTE",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 466,
+        "level": 2,
+        "type": "text",
+        "text": "Global consolidated Statutory employment rate*2 % 2.51 2.50 2.47 Statutory or over",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 468,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 470,
+        "level": 2,
+        "type": "text",
+        "text": "Statutory employment rate % 2.40 2.45 2.45 Statutory or over",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 472,
+        "level": 2,
+        "type": "text",
+        "text": "Hitachi Construction Above previous",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 473,
+        "level": 2,
+        "type": "list",
+        "text": null,
+        "matrix": [
+          [
+            "0",
+            "- Million Yen 4.4 2.3 0.3"
+          ]
+        ],
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_478_491",
+    "preceding_title": "Revenue per employee",
+    "block_ids": [
+      478,
+      481,
+      482,
+      483,
+      484,
+      485,
+      487,
+      490,
+      491
+    ],
+    "blocks": [
+      {
+        "id": 478,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 481,
+        "level": 2,
+        "type": "text",
+        "text": "Above previous",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 482,
+        "level": 2,
+        "type": "list",
+        "text": null,
+        "matrix": [
+          [
+            "0",
+            "- Million Yen 106.7 116.6 104.1"
+          ]
+        ],
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 483,
+        "level": 2,
+        "type": "text",
+        "text": "Machinery (standalone) year's figures",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 484,
+        "level": 1,
+        "type": "title",
+        "text": "*1",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 485,
+        "level": 2,
+        "type": "title",
+        "text": "Human Capital ROI",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 487,
+        "level": 3,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 490,
+        "level": 3,
+        "type": "text",
+        "text": "Above previous",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 491,
+        "level": 3,
+        "type": "list",
+        "text": null,
+        "matrix": [
+          [
+            "0",
+            "- % 52.0 27.0 -0.5"
+          ]
+        ],
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_503_507",
+    "preceding_title": "",
+    "block_ids": [
+      503,
+      504,
+      505,
+      507
+    ],
+    "blocks": [
+      {
+        "id": 503,
+        "level": 2,
+        "type": "text",
+        "text": "in global employee surveys Above previous % 62.2 64.8 68.4 year's figures Machinery (standalone)",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 504,
+        "level": 1,
+        "type": "title",
+        "text": "Number of occupational accidents （frequency rate）",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 505,
+        "level": 1,
+        "type": "title",
+        "text": "Leadership development",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 507,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_514_522",
+    "preceding_title": "Number of deaths due to occupational accidents",
+    "block_ids": [
+      514,
+      516,
+      518,
+      519,
+      520,
+      522
+    ],
+    "blocks": [
+      {
+        "id": 514,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 516,
+        "level": 2,
+        "type": "text",
+        "text": "Global consolidated Cases 0 0 0 Maintain at 0 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 518,
+        "level": 0,
+        "type": "title",
+        "text": "Cases",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 519,
+        "level": 1,
+        "type": "text",
+        "text": "0 0 0 Machinery (standalone)",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 520,
+        "level": 1,
+        "type": "title",
+        "text": "Percentage of health and safety training participants",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 522,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_538_543",
+    "preceding_title": "Internal mobility rate*",
+    "block_ids": [
+      538,
+      540,
+      543
+    ],
+    "blocks": [
+      {
+        "id": 538,
+        "level": 1,
+        "type": "title",
+        "text": "Training hours per employee",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 540,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 543,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_550_555",
+    "preceding_title": "Turnover rate",
+    "block_ids": [
+      550,
+      552,
+      555
+    ],
+    "blocks": [
+      {
+        "id": 550,
+        "level": 2,
+        "type": "text",
+        "text": "Average training hours per participant Hours 68.51 71.81 57.77 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 552,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 555,
+        "level": 2,
+        "type": "text",
+        "text": "Global consolidated* - % 10.52 9.44 10.41 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_579_588",
+    "preceding_title": "Number and type of grievance filed Disputes referred to external parties",
+    "block_ids": [
+      579,
+      581,
+      582,
+      583,
+      585,
+      586,
+      588
+    ],
+    "blocks": [
+      {
+        "id": 579,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025FY) Scope Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 581,
+        "level": 2,
+        "type": "text",
+        "text": "Global consolidated Compliance reports Cases 54 95 81 - Hitachi Construction",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 582,
+        "level": 2,
+        "type": "list",
+        "text": null,
+        "matrix": [
+          [
+            "0",
+            "- Cases 0 1 1 -"
+          ]
+        ],
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 583,
+        "level": 2,
+        "type": "text",
+        "text": "Machinery (standalone) Harassment-related issues Cases 5 27 23 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 585,
+        "level": 2,
+        "type": "text",
+        "text": "Machinery (standalone) Other labor-related matters Cases 1 3 7 -",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 586,
+        "level": 1,
+        "type": "title",
+        "text": "Number and type of disciplinary actions taken",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 588,
+        "level": 2,
+        "type": "text",
+        "text": "Unit 2022FY 2023FY 2024FY Target (2025",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  },
+  {
+    "cluster_id": "cluster_593_598",
+    "preceding_title": "",
+    "block_ids": [
+      593,
+      594,
+      596,
+      597,
+      598
+    ],
+    "blocks": [
+      {
+        "id": 593,
+        "level": 0,
+        "type": "title",
+        "text": "Cases",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 594,
+        "level": 1,
+        "type": "text",
+        "text": "2 6 3 Below previous",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 596,
+        "level": 1,
+        "type": "text",
+        "text": "Suspension year's figures Machinery (standalone) Pay cut Cases 6 1 3",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 597,
+        "level": 0,
+        "type": "title",
+        "text": "Reprimand",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      },
+      {
+        "id": 598,
+        "level": 1,
+        "type": "text",
+        "text": "Cases 1 4 3 Hitachi Construction Machinery Group Human Capital Report 2025 25",
+        "matrix": null,
+        "cleaned": null,
+        "preamble": null,
+        "footnotes": null,
+        "postamble": null
+      }
+    ]
+  }
+]
