@@ -22,6 +22,8 @@ except ImportError:
     print("Install it with: pip install doc2struct")
     sys.exit(1)
 
+from extract_facts import postprocess_extracted_facts
+
 
 DEFAULT_URL = "https://www.sec.gov/Archives/edgar/data/1013237/000162828026066391/fds-20260831.htm"
 DEFAULT_USER_AGENT = "SampleResearchApp/1.0 (contact@example.com)"
@@ -134,6 +136,11 @@ def main():
     print(f"[*] Parsing with doc2struct (rules='{args.rules}')...")
     structured_output = parse_html(html_bytes, rules=args.rules)
     print(f"[+] Successfully parsed {len(structured_output)} structured elements!")
+
+    # Post-processing: Extract discrete numeric facts from text blocks
+    structured_output = postprocess_extracted_facts(structured_output)
+    total_facts = sum(len(e.get("extracted_facts", [])) for e in structured_output if e.get("type", "").lower() == "text")
+    print(f"[+] Post-processed numeric facts: {total_facts} discrete facts extracted.")
 
     print_summary(structured_output)
     print_sample_sections(structured_output, limit=6)

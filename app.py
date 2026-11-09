@@ -24,6 +24,7 @@ except ImportError:
     raise
 
 from stitch_tables import auto_stitch_document
+from extract_facts import postprocess_extracted_facts
 
 BASE_DIR = Path(__file__).resolve().parent
 TEMP_DOCS_DIR = BASE_DIR / "temp_docs"
@@ -96,9 +97,26 @@ def get_visualizer(doc_id):
         return jsonify({"error": f"Failed to generate visualizer: {str(e)}"}), 500
 
 
-@app.route("/api/document/<doc_id>", methods=["GET"])
+@app.route("/api/document/<path:doc_id>", methods=["GET"])
 def get_document(doc_id):
-    """Serve the original document for iframe embedding."""
+    """Serve the original document or associated images for iframe embedding."""
+    # Check if doc_id is an image requested by an HTML document
+    lower_id = doc_id.lower()
+    if lower_id.endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
+        img_path = TEMP_DOCS_DIR / doc_id
+        if img_path.exists():
+            return send_file(img_path)
+        # Attempt fallback to EDGAR for SEC images
+        edgar_url = f"https://www.sec.gov/Archives/edgar/data/1013237/000162828026066391/{doc_id}"
+        try:
+            req = urllib.request.Request(edgar_url, headers={"User-Agent": "SampleResearchApp/1.0 (contact@example.com)"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = resp.read()
+                img_path.write_bytes(data)
+                return send_file(img_path)
+        except Exception:
+            return jsonify({"error": "Image not found"}), 404
+
     doc_info = DOC_STORE.get(doc_id)
     if not doc_info:
         for p in TEMP_DOCS_DIR.glob(f"{doc_id}.*"):
@@ -166,7 +184,10 @@ def parse_document():
     except Exception as e:
         return jsonify({"error": f"doc2struct parsing failed: {str(e)}"}), 500
 
-    # Apply Table Stitching pipeline to every document loaded
+    # Post-processing Step 1: Numeric Fact Extraction for text nodes
+    raw_elements = postprocess_extracted_facts(raw_elements)
+
+    # Post-processing Step 2: Table Stitching & Recovery
     elements, stitch_meta = auto_stitch_document(raw_elements, filename)
     elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
 
@@ -182,6 +203,7 @@ def parse_document():
         }
         for e in elements if e.get("class") == "item"
     ]
+    total_facts = sum(len(e.get("extracted_facts", [])) for e in elements if (e.get("type") or "").lower() == "text")
 
     return jsonify({
         "status": "success",
@@ -195,6 +217,7 @@ def parse_document():
         "total_elements": len(elements),
         "type_counts": counts,
         "sec_items": sec_items,
+        "total_extracted_facts": total_facts,
         "stitched": stitch_meta.get("stitched", False),
         "stitched_count": stitch_meta.get("count", 0),
         "flagged_count": stitch_meta.get("flagged", 0),
@@ -255,7 +278,10 @@ def load_sample():
     else:
         raw_elements = doc2struct.parse_html(doc_bytes, rules=rules)
 
-    # Perform table stitching
+    # Post-processing Step 1: Numeric Fact Extraction for text nodes
+    raw_elements = postprocess_extracted_facts(raw_elements)
+
+    # Post-processing Step 2: Table Stitching & Recovery
     elements, stitch_meta = auto_stitch_document(raw_elements, filename)
     elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
     DOC_STORE[doc_id]["elements"] = elements
@@ -270,6 +296,7 @@ def load_sample():
         }
         for e in elements if e.get("class") == "item"
     ]
+    total_facts = sum(len(e.get("extracted_facts", [])) for e in elements if (e.get("type") or "").lower() == "text")
 
     return jsonify({
         "status": "success",
@@ -283,6 +310,7 @@ def load_sample():
         "total_elements": len(elements),
         "type_counts": counts,
         "sec_items": sec_items,
+        "total_extracted_facts": total_facts,
         "stitched": stitch_meta.get("stitched", False),
         "stitched_count": stitch_meta.get("count", 0),
         "flagged_count": stitch_meta.get("flagged", 0),

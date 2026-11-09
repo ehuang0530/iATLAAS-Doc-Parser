@@ -231,6 +231,7 @@
           <span id="badge-total-elements" class="hidden px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-semibold border border-emerald-500/30">0 items</span>
           <span id="badge-parse-time" class="hidden px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 font-mono text-[11px]">0 ms</span>
           <span id="badge-stitched" class="hidden px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-mono text-[11px] font-semibold border border-amber-500/30">✨ 0 Stitched</span>
+          <span id="badge-facts" class="hidden px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-mono text-[11px] font-semibold border border-purple-500/30">📊 0 Facts</span>
         </div>
 
         <!-- View Switcher -->
@@ -268,6 +269,7 @@
           <button data-type="all" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-sky-600 text-white transition">All</button>
           <button data-type="table" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Tables</button>
           <button data-type="stitched" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-amber-300 hover:bg-slate-700 transition">✨ Stitched Tables</button>
+          <button data-type="facts" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-purple-300 hover:bg-slate-700 transition">📊 Numeric Facts</button>
           <button data-type="title" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Titles</button>
           <button data-type="text" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Text</button>
           <button data-type="sec-items" class="type-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SEC Items</button>
@@ -618,6 +620,17 @@ function renderResults(res) {
     }
   }
 
+  const badgeFacts = document.getElementById('badge-facts');
+  if (badgeFacts) {
+    const factsCount = res.total_extracted_facts || (res.data ? res.data.reduce((acc, d) => acc + (d.extracted_facts ? d.extracted_facts.length : 0), 0) : 0);
+    if (factsCount > 0) {
+      badgeFacts.textContent = `📊 ${factsCount} Facts Extracted`;
+      badgeFacts.classList.remove('hidden');
+    } else {
+      badgeFacts.classList.add('hidden');
+    }
+  }
+
   // Populate SEC Items dropdown
   if (state.secItems.length > 0) {
     secItemsWrapper.classList.remove('hidden');
@@ -634,6 +647,7 @@ function renderResults(res) {
 
   // Update type pills counts
   const stitchedTotal = res.stitched_count || (res.data ? res.data.filter(d => d.type === 'table' && d.cleaned && d.cleaned.includes('llm_stitched_table')).length : 0);
+  const factsBlocksTotal = res.data ? res.data.filter(d => d.extracted_facts && d.extracted_facts.length > 0).length : 0;
   document.querySelectorAll('.type-pill').forEach(pill => {
     const type = pill.dataset.type;
     if (type === 'all') {
@@ -642,6 +656,8 @@ function renderResults(res) {
       pill.textContent = `SEC Items (${state.secItems.length})`;
     } else if (type === 'stitched') {
       pill.textContent = `✨ Stitched Tables (${stitchedTotal})`;
+    } else if (type === 'facts') {
+      pill.textContent = `📊 Numeric Facts (${factsBlocksTotal})`;
     } else if (res.type_counts && res.type_counts[type] !== undefined) {
       pill.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}s (${res.type_counts[type]})`;
     }
@@ -665,6 +681,8 @@ function applyFilter() {
       if (item.class !== 'item' && !item.standardized_title) return false;
     } else if (state.activeFilter === 'stitched') {
       if (item.type !== 'table' || !(item.cleaned && item.cleaned.includes('llm_stitched_table'))) return false;
+    } else if (state.activeFilter === 'facts') {
+      if (!item.extracted_facts || item.extracted_facts.length === 0) return false;
     } else if (state.activeFilter !== 'all') {
       if (item.type !== state.activeFilter) return false;
     }
@@ -676,6 +694,14 @@ function applyFilter() {
       const titleMatch = item.standardized_title && item.standardized_title.toLowerCase().includes(q);
       const idMatch = String(item.id).includes(q);
       const preambleMatch = item.preamble && item.preamble.toLowerCase().includes(q);
+      const matrixMatch = item.matrix && JSON.stringify(item.matrix).toLowerCase().includes(q);
+      const factsMatch = item.extracted_facts && JSON.stringify(item.extracted_facts).toLowerCase().includes(q);
+      if (!textMatch && !titleMatch && !idMatch && !preambleMatch && !matrixMatch && !factsMatch) {
+        return false;
+      }
+    }
+    return true;
+  });
       const matrixMatch = item.matrix && JSON.stringify(item.matrix).toLowerCase().includes(q);
       if (!textMatch && !titleMatch && !idMatch && !preambleMatch && !matrixMatch) {
         return false;
@@ -747,6 +773,9 @@ function renderCardsList(elements) {
       const isTitle = el.type === 'title';
       const textStyle = isTitle ? 'font-bold text-sm text-white' : 'text-xs text-slate-300 leading-relaxed';
       bodyHtml = `<div class="${textStyle}">${escapeHtml(el.text || '')}</div>`;
+      if (el.type === 'text' && el.extracted_facts && el.extracted_facts.length > 0) {
+        bodyHtml += renderExtractedFacts(el.extracted_facts, el.id);
+      }
     }
 
     // Hidden single-element raw JSON block
@@ -768,6 +797,59 @@ function renderCardsList(elements) {
     moreNotice.textContent = `Displaying first ${renderLimit} of ${elements.length} elements. Use search or category filters to narrow results.`;
     cardsList.appendChild(moreNotice);
   }
+}
+
+// Render Extracted Facts Table
+function renderExtractedFacts(facts, id) {
+  if (!facts || facts.length === 0) return '';
+  let html = `
+    <div class="mt-3 pt-2.5 border-t border-slate-700/60">
+      <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
+          📊 ${facts.length} Extracted Numeric Facts
+        </span>
+        <button onclick="const t = document.getElementById('facts-table-${id}'); t.classList.toggle('hidden');" class="text-[11px] text-purple-400 hover:text-purple-300 underline font-medium">
+          Toggle Facts Table
+        </button>
+      </div>
+      <div id="facts-table-${id}" class="overflow-x-auto rounded-lg border border-purple-900/40 bg-slate-950/80 my-1">
+        <table class="w-full text-left text-[11px] border-collapse">
+          <thead>
+            <tr class="bg-purple-950/40 border-b border-purple-900/60 text-purple-200 font-semibold">
+              <th class="p-1.5 border-r border-slate-800 whitespace-nowrap">Metric</th>
+              <th class="p-1.5 border-r border-slate-800 whitespace-nowrap">Value</th>
+              <th class="p-1.5 border-r border-slate-800 whitespace-nowrap">Raw String</th>
+              <th class="p-1.5 border-r border-slate-800 whitespace-nowrap">Unit</th>
+              <th class="p-1.5 border-r border-slate-800 whitespace-nowrap">As-Of Date</th>
+              <th class="p-1.5 border-r border-slate-800">Dimensions</th>
+              <th class="p-1.5">Source Sentence</th>
+            </tr>
+          </thead>
+          <tbody>
+  `;
+  facts.forEach((f, idx) => {
+    const rowBg = idx % 2 === 0 ? 'bg-slate-950/50' : 'bg-slate-900/30';
+    const dims = [];
+    if (f.dimensions) {
+      if (f.dimensions.geography) dims.push(`Geo: <span class="text-sky-300 font-semibold">${escapeHtml(f.dimensions.geography)}</span>`);
+      if (f.dimensions.department_function) dims.push(`Dept: <span class="text-amber-300 font-semibold">${escapeHtml(f.dimensions.department_function)}</span>`);
+      if (f.dimensions.representation_type) dims.push(`Rep: <span class="text-pink-300 font-semibold">${escapeHtml(f.dimensions.representation_type)}</span>`);
+    }
+    const dimHtml = dims.length ? dims.join(' | ') : '<span class="text-slate-500">-</span>';
+    html += `
+      <tr class="${rowBg} border-b border-slate-800/80 hover:bg-slate-800/40">
+        <td class="p-1.5 border-r border-slate-800 font-mono font-medium text-sky-400 whitespace-nowrap">${escapeHtml(f.metric || '')}</td>
+        <td class="p-1.5 border-r border-slate-800 font-mono font-bold text-emerald-400 whitespace-nowrap">${escapeHtml(String(f.value))}</td>
+        <td class="p-1.5 border-r border-slate-800 font-mono text-slate-300 whitespace-nowrap">${escapeHtml(f.raw_value_string || '')}</td>
+        <td class="p-1.5 border-r border-slate-800 text-slate-300 whitespace-nowrap">${escapeHtml(f.unit || '-')}</td>
+        <td class="p-1.5 border-r border-slate-800 font-mono text-slate-300 whitespace-nowrap">${escapeHtml(f.temporal_context?.as_of_date || '-')}</td>
+        <td class="p-1.5 border-r border-slate-800 text-slate-300 text-[10px] leading-tight">${dimHtml}</td>
+        <td class="p-1.5 text-slate-400 text-[10px] max-w-[280px] truncate" title="${escapeHtml(f.source_sentence || '')}">${escapeHtml(f.source_sentence || '')}</td>
+      </tr>
+    `;
+  });
+  html += `</tbody></table></div></div>`;
+  return html;
 }
 
 // Render Table Structure

@@ -19,6 +19,11 @@ iATLAAS Doc Parser provides both a web UI and CLI utilities to ingest complex do
       - Preserves dashes (`"-"`, `"—"`) and units (`"%"`, `"hours/year"`, `"Million Yen"`, `"Cases"`).
       - Highlights stitched tables with `✨ Stitched Table Matrix` badges and surfaces `⚠️ Needs Visual Check` alerts for interleaved multi-column layouts.
       - Dedicated `✨ Stitched Tables` filter pill to view only reconstructed tables in one click.
+    - **Numeric Fact Extraction Post-Processor**:
+      - Post-processing transformation step executing immediately following doc2struct parsing.
+      - Evaluates text blocks (`type == "text"`) and extracts discrete numeric facts into `extracted_facts`.
+      - Captures normalized values (`value`), verbatim strings (`raw_value_string`), units (`unit`), temporal context (`as_of_date`, `comparison_period`), multi-dimensional qualifiers (`geography`, `department_function`, `representation_type`), and source sentences.
+      - Dedicated `📊 Numeric Facts` filter pill and expandable data grids in web UI cards.
     - **Search & Filters**: Real-time text search and category filter pills (`Tables`, `Stitched Tables`, `Titles`, `Text`, `SEC Items`).
     - **SEC Section Navigator**: Quick-jump dropdown to jump directly to SEC items (e.g., Item 1 Business, Item 1A Risk Factors, Item 7 MD&A, Item 8 Financial Statements).
     - **Interactive JSON Tree**: Collapsible/expandable nodes with syntax highlighting.
@@ -122,7 +127,8 @@ python parse_sec_filing.py --url "https://www.sec.gov/Archives/edgar/data/101323
 
 ```text
 iATLAAS-Doc-Parser/
-├── app.py                      # Flask web backend and REST API (auto table stitching)
+├── app.py                      # Flask web backend and REST API (auto table stitching & facts extraction)
+├── extract_facts.py            # Numeric fact extraction post-processor
 ├── stitch_tables.py            # Table detection and matrix reconstruction CLI & engine
 ├── stitched_tables.json        # Hitachi reconstructed table matrices
 ├── stitched_tables_toyota.json # Toyota Tsusho reconstructed metrics matrices
