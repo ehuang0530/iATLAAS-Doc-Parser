@@ -702,13 +702,6 @@ function applyFilter() {
     }
     return true;
   });
-      const matrixMatch = item.matrix && JSON.stringify(item.matrix).toLowerCase().includes(q);
-      if (!textMatch && !titleMatch && !idMatch && !preambleMatch && !matrixMatch) {
-        return false;
-      }
-    }
-    return true;
-  });
 
   renderCardsList(state.filteredData);
 }

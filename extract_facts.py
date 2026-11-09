@@ -297,3 +297,4 @@ if __name__ == "__main__":
     print(f"Extracted {len(facts)} facts from sample text.")
     import json
     print(json.dumps(facts, indent=2))
+
