@@ -97,6 +97,9 @@
 <body class="bg-slate-900 text-slate-100 antialiased select-text">
 
 <div class="app-layout">
+  <!-- Global Error Banner -->
+  <div id="global-error-banner" class="hidden bg-rose-600 text-white px-4 py-2 text-xs font-semibold flex items-center justify-between z-50"></div>
+
   <!-- Top Header Bar -->
   <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700/80 px-4 flex items-center justify-between gap-4 z-20">
     <div class="flex items-center gap-3">
@@ -132,10 +135,10 @@
           Sample:
         </span>
         <select id="sample-select" class="bg-slate-950 text-slate-200 outline-none cursor-pointer text-xs rounded border border-slate-700 px-1.5 py-0.5">
+          <option value="fds" selected>FactSet 10-K (SEC HTML)</option>
           <option value="hitachi">Hitachi Human Capital Report 2025 (PDF)</option>
           <option value="toyota">Toyota Tsusho HC Report 2025 (PDF)</option>
           <option value="tw">Taiwan Sample ESG Report (PDF)</option>
-          <option value="fds">FactSet 10-K (SEC HTML)</option>
         </select>
         <button id="btn-load-sample" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-medium text-xs rounded transition shadow-sm">
           Load
@@ -145,8 +148,8 @@
       <!-- Action: Upload File -->
       <label class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 active:scale-95 text-white font-medium text-xs rounded-lg transition shadow-md shadow-sky-900/30 flex items-center gap-1.5 cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Upload File (PDF/HTML)
-        <input type="file" id="file-input" accept=".html,.htm,.pdf,.txt" class="hidden">
+        Upload File (PDF/HTML/JSON)
+        <input type="file" id="file-input" accept=".html,.htm,.pdf,.txt,.json" class="hidden">
       </label>
 
       <!-- Action: URL input trigger -->
@@ -201,15 +204,15 @@
           <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center text-sky-400 mb-4 shadow-inner">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
           </div>
-          <h3 class="text-base font-semibold text-white mb-1">Upload PDF or HTML Document</h3>
-          <p class="text-xs text-slate-400 mb-6 max-w-xs">Drag and drop any SEC filing, report, or document here to process with doc2struct.</p>
+          <h3 class="text-base font-semibold text-white mb-1">Upload PDF, HTML, or JSON Document</h3>
+          <p class="text-xs text-slate-400 mb-6 max-w-xs">Drag and drop any SEC filing, report, or parsed JSON document here to view and process.</p>
           <div class="flex gap-3">
             <label class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-medium text-xs transition cursor-pointer shadow-md shadow-sky-900/20">
               Browse File
-              <input type="file" id="dropzone-file-input" accept=".html,.htm,.pdf,.txt" class="hidden">
+              <input type="file" id="dropzone-file-input" accept=".html,.htm,.pdf,.txt,.json" class="hidden">
             </label>
             <button id="btn-dropzone-sample" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 rounded-lg font-medium text-xs transition">
-              Try 10-K Sample
+              Try FactSet 10-K Sample
             </button>
           </div>
         </div>
@@ -238,6 +241,9 @@
         <div class="flex items-center bg-slate-900 p-0.5 rounded-lg border border-slate-700">
           <button id="tab-btn-cards" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-600 text-white shadow-sm transition">
             Cards & Tables
+          </button>
+          <button id="tab-btn-facts" class="px-2.5 py-1 rounded-md text-xs font-semibold text-purple-300 hover:text-white transition">
+            📊 Extracted Facts
           </button>
           <button id="tab-btn-tree" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-slate-200 transition">
             Interactive JSON
@@ -287,9 +293,51 @@
         <!-- View 1: Cards & Table Explorer -->
         <div id="view-cards" class="space-y-3 pb-8">
           <div id="cards-empty-state" class="text-center py-20 text-slate-500 text-sm">
-            Upload a document or click "Load 10-K Sample" to see the parsed elements.
+            Upload a document or select a sample report above to view structured elements.
           </div>
           <div id="cards-list" class="space-y-3"></div>
+        </div>
+
+        <!-- View 4: Extracted Numeric Facts Ledger -->
+        <div id="view-facts" class="hidden pb-8 space-y-3">
+          <div class="flex items-center justify-between mb-3 flex-wrap gap-2 bg-slate-850 p-3 rounded-xl border border-slate-700/80">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-purple-300 flex items-center gap-1.5">
+                📊 Document Facts Ledger
+              </span>
+              <span id="facts-ledger-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">0 facts</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" id="facts-search-input" placeholder="Search metric, dimensions, text..." class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-200 placeholder-slate-500 outline-none focus:border-purple-500">
+              <button id="btn-export-facts-csv" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 rounded text-white text-xs font-medium flex items-center gap-1 shadow-sm transition">
+                ⬇ Export CSV
+              </button>
+              <button id="btn-export-facts-json" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-500 rounded text-white text-xs font-medium flex items-center gap-1 shadow-sm transition">
+                ⬇ Export JSON
+              </button>
+            </div>
+          </div>
+          <div id="facts-empty-state" class="hidden text-center py-16 text-slate-500 text-xs bg-slate-950/60 rounded-xl border border-slate-800">
+            No numeric facts extracted in this document.
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-purple-900/40 bg-slate-950 shadow-md">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-purple-950/60 border-b border-purple-900/70 text-purple-200 font-semibold text-[11px]">
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">Block</th>
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">Metric</th>
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">Value</th>
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">Raw String</th>
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">Unit</th>
+                  <th class="p-2 border-r border-slate-800 whitespace-nowrap">As-Of Date</th>
+                  <th class="p-2 border-r border-slate-800">Dimensions</th>
+                  <th class="p-2">Source Sentence</th>
+                </tr>
+              </thead>
+              <tbody id="facts-ledger-tbody">
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- View 2: Interactive JSON Tree -->
@@ -336,6 +384,18 @@
 
 <script>
 // ==========================================
+// Global Error Handler for UI Safety
+// ==========================================
+window.onerror = function(msg, url, line, col, error) {
+  console.error("Global UI Script Error:", msg, "at line", line, col, error);
+  const banner = document.getElementById('global-error-banner');
+  if (banner) {
+    banner.classList.remove('hidden');
+    banner.innerHTML = `<span>⚠️ <b>Script Warning:</b> ${msg} (line ${line})</span> <button onclick="location.reload(true)" class="underline font-bold ml-2">Reload App</button>`;
+  }
+};
+
+// ==========================================
 // doc2struct Client State & Controller
 // ==========================================
 const state = {
@@ -343,7 +403,7 @@ const state = {
   filteredData: [],
   activeFilter: 'all',
   searchQuery: '',
-  activeTab: 'cards', // 'cards' | 'tree' | 'raw'
+  activeTab: 'cards', // 'cards' | 'facts' | 'tree' | 'raw'
   secItems: []
 };
 
@@ -369,13 +429,23 @@ const secItemsWrapper = document.getElementById('sec-items-wrapper');
 const secItemsJump = document.getElementById('sec-items-jump');
 const btnExportJson = document.getElementById('btn-export-json');
 
-// Tab Buttons
+// Tab Buttons & Views
 const tabBtnCards = document.getElementById('tab-btn-cards');
+const tabBtnFacts = document.getElementById('tab-btn-facts');
 const tabBtnTree = document.getElementById('tab-btn-tree');
 const tabBtnRaw = document.getElementById('tab-btn-raw');
 const viewCards = document.getElementById('view-cards');
+const viewFacts = document.getElementById('view-facts');
 const viewTree = document.getElementById('view-tree');
 const viewRaw = document.getElementById('view-raw');
+
+// Facts Ledger References
+const factsLedgerCount = document.getElementById('facts-ledger-count');
+const factsLedgerTbody = document.getElementById('facts-ledger-tbody');
+const factsEmptyState = document.getElementById('facts-empty-state');
+const factsSearchInput = document.getElementById('facts-search-input');
+const btnExportFactsCsv = document.getElementById('btn-export-facts-csv');
+const btnExportFactsJson = document.getElementById('btn-export-facts-json');
 
 // URL Modal
 const urlModal = document.getElementById('url-modal');
@@ -386,15 +456,30 @@ const btnSubmitUrl = document.getElementById('btn-submit-url');
 const urlInput = document.getElementById('url-input');
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   setupEventListeners();
-  loadPresets();
+  await loadPresets();
+  // Automatically load default document so the user immediately sees a working dual view
+  if (!state.currentData) {
+    loadSample();
+  }
 });
 
 function setupEventListeners() {
   // File inputs
-  fileInput.addEventListener('change', (e) => handleFileUpload(e.target.files[0]));
-  dropzoneFileInput.addEventListener('change', (e) => handleFileUpload(e.target.files[0]));
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length) handleFileUpload(e.target.files[0]);
+  });
+  dropzoneFileInput.addEventListener('change', (e) => {
+    if (e.target.files.length) handleFileUpload(e.target.files[0]);
+  });
+
+  // Make dropzone box clickable
+  uploadDropzone.addEventListener('click', (e) => {
+    if (!e.target.closest('button') && !e.target.closest('label')) {
+      dropzoneFileInput.click();
+    }
+  });
 
   // Drag and drop
   uploadDropzone.addEventListener('dragover', (e) => {
@@ -418,8 +503,14 @@ function setupEventListeners() {
 
   // Tab switching
   tabBtnCards.addEventListener('click', () => switchTab('cards'));
+  tabBtnFacts.addEventListener('click', () => switchTab('facts'));
   tabBtnTree.addEventListener('click', () => switchTab('tree'));
   tabBtnRaw.addEventListener('click', () => switchTab('raw'));
+
+  // Facts Ledger Exports & Search
+  btnExportFactsCsv.addEventListener('click', exportFactsCsv);
+  btnExportFactsJson.addEventListener('click', exportFactsJson);
+  factsSearchInput.addEventListener('input', (e) => filterFactsTab(e.target.value.toLowerCase().trim()));
 
   // Filtering & Search
   document.querySelectorAll('.type-pill').forEach(btn => {
@@ -514,11 +605,14 @@ async function loadPresets() {
 // Upload file handler
 async function handleFileUpload(file) {
   if (!file) return;
+  const fileName = file.name;
+  fileInput.value = '';
+  dropzoneFileInput.value = '';
   const formData = new FormData();
   formData.append('file', file);
   formData.append('rules', rulesSelect.value);
 
-  showLoading(`Parsing ${file.name} with doc2struct...`);
+  showLoading(`Parsing ${fileName} with doc2struct...`);
   try {
     const res = await fetch('/api/parse', { method: 'POST', body: formData });
     const data = await res.json();
@@ -534,7 +628,7 @@ async function handleFileUpload(file) {
 // Load sample handler
 async function loadSample() {
   const sampleSelect = document.getElementById('sample-select');
-  const sampleKey = sampleSelect ? sampleSelect.value : 'hitachi';
+  const sampleKey = sampleSelect ? sampleSelect.value : 'fds';
   const sampleLabels = {
     fds: 'FactSet (FDS) 2026 Form 10-K',
     hitachi: 'Hitachi Construction Machinery Human Capital Report 2025',
@@ -666,9 +760,12 @@ function renderResults(res) {
   // Render Visual Cards
   applyFilter();
 
-  // Populate Raw & Tree
+  // Populate Raw, Tree, and Facts Ledger asynchronously to keep the UI snappy
   rawJsonPre.textContent = JSON.stringify(res.data, null, 2);
-  renderTree(res.data);
+  setTimeout(() => {
+    renderTree(res.data);
+    renderFactsTab(res.data);
+  }, 20);
 }
 
 // Apply Filters & Search
@@ -940,11 +1037,11 @@ window.toggleCardRaw = function(id) {
 // Switch Tabs
 function switchTab(tab) {
   state.activeTab = tab;
-  [tabBtnCards, tabBtnTree, tabBtnRaw].forEach(b => {
-    b.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+  [tabBtnCards, tabBtnFacts, tabBtnTree, tabBtnRaw].forEach(b => {
+    b.classList.remove('bg-sky-600', 'bg-purple-600', 'text-white', 'shadow-sm');
     b.classList.add('text-slate-400');
   });
-  [viewCards, viewTree, viewRaw].forEach(v => v.classList.add('hidden'));
+  [viewCards, viewFacts, viewTree, viewRaw].forEach(v => v.classList.add('hidden'));
 
   const filterBar = document.getElementById('filter-bar');
 
@@ -953,6 +1050,11 @@ function switchTab(tab) {
     tabBtnCards.classList.remove('text-slate-400');
     viewCards.classList.remove('hidden');
     filterBar.classList.remove('hidden');
+  } else if (tab === 'facts') {
+    tabBtnFacts.classList.add('bg-purple-600', 'text-white', 'shadow-sm');
+    tabBtnFacts.classList.remove('text-slate-400');
+    viewFacts.classList.remove('hidden');
+    filterBar.classList.add('hidden');
   } else if (tab === 'tree') {
     tabBtnTree.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
     tabBtnTree.classList.remove('text-slate-400');
@@ -964,6 +1066,128 @@ function switchTab(tab) {
     viewRaw.classList.remove('hidden');
     filterBar.classList.add('hidden');
   }
+}
+
+// Facts Ledger Controller
+let allExtractedFacts = [];
+
+function renderFactsTab(data) {
+  allExtractedFacts = [];
+  if (!data || !Array.isArray(data)) return;
+
+  data.forEach(item => {
+    if (item.extracted_facts && Array.isArray(item.extracted_facts)) {
+      item.extracted_facts.forEach(f => {
+        allExtractedFacts.push({ ...f, block_id: item.id });
+      });
+    }
+  });
+
+  if (factsLedgerCount) factsLedgerCount.textContent = `${allExtractedFacts.length} facts`;
+  renderFactsLedgerTable(allExtractedFacts);
+}
+
+function renderFactsLedgerTable(factsList) {
+  if (!factsLedgerTbody) return;
+  factsLedgerTbody.innerHTML = '';
+  if (!factsList || factsList.length === 0) {
+    if (factsEmptyState) factsEmptyState.classList.remove('hidden');
+    return;
+  }
+  if (factsEmptyState) factsEmptyState.classList.add('hidden');
+
+  const fragment = document.createDocumentFragment();
+  factsList.forEach((f, idx) => {
+    const tr = document.createElement('tr');
+    tr.className = (idx % 2 === 0 ? 'bg-slate-950/60' : 'bg-slate-900/40') + ' border-b border-slate-800/80 hover:bg-purple-950/20';
+
+    const dims = [];
+    if (f.dimensions) {
+      if (f.dimensions.geography) dims.push(`Geo: <span class="text-sky-300 font-semibold">${escapeHtml(f.dimensions.geography)}</span>`);
+      if (f.dimensions.department_function) dims.push(`Dept: <span class="text-amber-300 font-semibold">${escapeHtml(f.dimensions.department_function)}</span>`);
+      if (f.dimensions.representation_type) dims.push(`Rep: <span class="text-pink-300 font-semibold">${escapeHtml(f.dimensions.representation_type)}</span>`);
+    }
+    const dimHtml = dims.length ? dims.join(' | ') : '<span class="text-slate-500">-</span>';
+
+    tr.innerHTML = `
+      <td class="p-2 border-r border-slate-800 font-mono text-[11px] whitespace-nowrap">
+        <a href="javascript:void(0)" onclick="jumpToBlock(${f.block_id})" class="text-purple-400 hover:text-purple-300 underline font-bold">#${f.block_id}</a>
+      </td>
+      <td class="p-2 border-r border-slate-800 font-mono text-sky-400 font-medium whitespace-nowrap">${escapeHtml(f.metric || '')}</td>
+      <td class="p-2 border-r border-slate-800 font-mono font-bold text-emerald-400 whitespace-nowrap">${escapeHtml(String(f.value))}</td>
+      <td class="p-2 border-r border-slate-800 font-mono text-slate-300 whitespace-nowrap">${escapeHtml(f.raw_value_string || '')}</td>
+      <td class="p-2 border-r border-slate-800 text-slate-300 whitespace-nowrap">${escapeHtml(f.unit || '-')}</td>
+      <td class="p-2 border-r border-slate-800 font-mono text-slate-300 whitespace-nowrap">${escapeHtml(f.temporal_context?.as_of_date || '-')}</td>
+      <td class="p-2 border-r border-slate-800 text-slate-300 text-[10px] leading-tight">${dimHtml}</td>
+      <td class="p-2 text-slate-400 text-[11px] max-w-[280px] truncate" title="${escapeHtml(f.source_sentence || '')}">${escapeHtml(f.source_sentence || '')}</td>
+    `;
+    fragment.appendChild(tr);
+  });
+  factsLedgerTbody.appendChild(fragment);
+}
+
+function filterFactsTab(q) {
+  if (!q) {
+    renderFactsLedgerTable(allExtractedFacts);
+    return;
+  }
+  const filtered = allExtractedFacts.filter(f => {
+    return (f.metric && f.metric.toLowerCase().includes(q)) ||
+           (String(f.value).includes(q)) ||
+           (f.raw_value_string && f.raw_value_string.toLowerCase().includes(q)) ||
+           (f.source_sentence && f.source_sentence.toLowerCase().includes(q)) ||
+           (f.dimensions && JSON.stringify(f.dimensions).toLowerCase().includes(q));
+  });
+  renderFactsLedgerTable(filtered);
+}
+
+window.jumpToBlock = function(id) {
+  switchTab('cards');
+  setTimeout(() => {
+    const el = document.getElementById(`card-elem-${id}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('ring-2', 'ring-purple-400');
+      setTimeout(() => el.classList.remove('ring-2', 'ring-purple-400'), 2500);
+    }
+  }, 100);
+};
+
+function exportFactsCsv() {
+  if (!allExtractedFacts || allExtractedFacts.length === 0) return alert('No facts to export');
+  const headers = ['Block ID', 'Metric', 'Value', 'Raw String', 'Unit', 'As-Of Date', 'Comparison Date', 'Geography', 'Department', 'Representation', 'Source Sentence'];
+  const rows = allExtractedFacts.map(f => [
+    f.block_id,
+    `"${(f.metric || '').replace(/"/g, '""')}"`,
+    f.value,
+    `"${(f.raw_value_string || '').replace(/"/g, '""')}"`,
+    `"${(f.unit || '').replace(/"/g, '""')}"`,
+    `"${(f.temporal_context?.as_of_date || '').replace(/"/g, '""')}"`,
+    `"${(f.temporal_context?.comparison_period || '').replace(/"/g, '""')}"`,
+    `"${(f.dimensions?.geography || '').replace(/"/g, '""')}"`,
+    `"${(f.dimensions?.department_function || '').replace(/"/g, '""')}"`,
+    `"${(f.dimensions?.representation_type || '').replace(/"/g, '""')}"`,
+    `"${(f.source_sentence || '').replace(/"/g, '""')}"`
+  ]);
+  const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `extracted_facts_${Date.now()}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportFactsJson() {
+  if (!allExtractedFacts || allExtractedFacts.length === 0) return alert('No facts to export');
+  const blob = new Blob([JSON.stringify(allExtractedFacts, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `extracted_facts_${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // Render Interactive JSON Tree

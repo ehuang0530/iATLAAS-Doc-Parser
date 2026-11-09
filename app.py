@@ -39,13 +39,28 @@ app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024  # 100 MB max upload
 DOC_STORE = {}
 
 
+@app.after_request
+def add_cache_headers(response):
+    """Ensure browsers always get the latest scripts and templates without caching."""
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
+
 def detect_file_type(content: bytes, filename: str = "") -> str:
-    """Detect whether file is PDF, HTML, or TXT."""
+    """Detect whether file is PDF, HTML, JSON, or TXT."""
     lower_fn = filename.lower()
     if lower_fn.endswith(".pdf") or content[:5] == b"%PDF-":
         return "pdf"
     if lower_fn.endswith((".htm", ".html")) or b"<html" in content[:2000].lower() or b"<!doctype" in content[:2000].lower():
         return "html"
+    if lower_fn.endswith(".json") or (content.strip()[:1] in (b"[", b"{") and content.strip()[-1:] in (b"]", b"}")):
+        try:
+            json.loads(content.decode("utf-8", errors="replace"))
+            return "json"
+        except Exception:
+            pass
     return "text"
 
 
@@ -121,12 +136,13 @@ def get_document(doc_id):
     if not doc_info:
         for p in TEMP_DOCS_DIR.glob(f"{doc_id}.*"):
             ext = p.suffix.lower()
-            mimetype = "application/pdf" if ext == ".pdf" else "text/html; charset=utf-8" if ext in (".htm", ".html") else "text/plain"
+            mimetype = "application/pdf" if ext == ".pdf" else "application/json; charset=utf-8" if ext == ".json" else "text/html; charset=utf-8" if ext in (".htm", ".html") else "text/plain"
             return send_file(p, mimetype=mimetype)
         return jsonify({"error": "Document not found"}), 404
 
     file_path = doc_info["path"]
-    mimetype = "application/pdf" if doc_info["file_type"] == "pdf" else "text/html; charset=utf-8" if doc_info["file_type"] == "html" else "text/plain"
+    ft = doc_info["file_type"]
+    mimetype = "application/pdf" if ft == "pdf" else "application/json; charset=utf-8" if ft == "json" else "text/html; charset=utf-8" if ft == "html" else "text/plain"
     return send_file(file_path, mimetype=mimetype, as_attachment=False)
 
 
@@ -166,7 +182,7 @@ def parse_document():
     file_type = detect_file_type(doc_bytes, filename)
     doc_id = str(uuid.uuid4())[:8]
 
-    ext = ".pdf" if file_type == "pdf" else ".html" if file_type == "html" else ".txt"
+    ext = ".pdf" if file_type == "pdf" else ".html" if file_type == "html" else ".json" if file_type == "json" else ".txt"
     file_path = TEMP_DOCS_DIR / f"{doc_id}{ext}"
     file_path.write_bytes(doc_bytes)
 
@@ -180,7 +196,12 @@ def parse_document():
 
     start_time = time.perf_counter()
     try:
-        raw_elements = process_with_doc2struct(doc_bytes, file_type, rules)
+        if file_type == "json":
+            raw_elements = json.loads(doc_bytes.decode("utf-8", errors="replace"))
+            if not isinstance(raw_elements, list):
+                raw_elements = [raw_elements]
+        else:
+            raw_elements = process_with_doc2struct(doc_bytes, file_type, rules)
     except Exception as e:
         return jsonify({"error": f"doc2struct parsing failed: {str(e)}"}), 500
 
